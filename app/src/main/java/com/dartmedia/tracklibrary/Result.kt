@@ -65,7 +65,7 @@ class Result : AppCompatActivity() {
                 val responseBody = response.body()
                 if (response.isSuccessful) {
                     if (responseBody != null) {
-                        Toast.makeText(this@Result, response.message(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@Result, responseBody.message, Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     Toast.makeText(this@Result, response.message(), Toast.LENGTH_SHORT).show()

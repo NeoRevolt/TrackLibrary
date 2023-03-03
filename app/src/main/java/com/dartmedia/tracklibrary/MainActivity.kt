@@ -17,11 +17,7 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var sessionManager: SessionManager
-
-    private var SHARED_PREF_NAME = "mypref"
-    private var KEY_TOKEN = "key_token"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         sessionManager = SessionManager(this)
 
-        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE)
-        val token = sharedPreferences.getString(KEY_TOKEN, null)
+        val token = sessionManager.fetchAuthToken()
         if (token != null) {
             val i = Intent(this, Result::class.java)
             startActivity(i)
@@ -57,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 val responseBody = response.body()
                 if (response.isSuccessful){
                     if (responseBody != null){
-                        setSession(responseBody)
+                        Toast.makeText(this@MainActivity, responseBody.message, Toast.LENGTH_SHORT).show()
                         sessionManager.saveAuthToken(responseBody.data.accessToken)
                         Intent(this@MainActivity, Result::class.java).also {
                             startActivity(it)
@@ -76,11 +71,5 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-    }
-
-    private fun setSession(session: LoginResponseModel) {
-        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.putString(KEY_TOKEN, session.data.accessToken)
-        editor.apply()
     }
 }

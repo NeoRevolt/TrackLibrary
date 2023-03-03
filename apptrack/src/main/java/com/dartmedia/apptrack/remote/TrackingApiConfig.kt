@@ -11,7 +11,6 @@ class TrackingApiConfig {
 
     companion object {
 
-        private const val BASE_URL1 = "https://story-api.dicoding.dev/"
         private const val BASE_URL = "http://192.168.1.20:5000/api/"
 
 
