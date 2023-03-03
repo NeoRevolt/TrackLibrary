@@ -24,6 +24,11 @@ class Result : AppCompatActivity() {
 
     private lateinit var transactionReport: TransactionReport
 
+    override fun onStart() {
+        transactionReport.getAllAction()
+        super.onStart()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
@@ -45,6 +50,10 @@ class Result : AppCompatActivity() {
 
             transactionBtn.setOnClickListener {
                 transactionReport.addLogTrack("transfer", "transaction")
+            }
+
+            validateBtn.setOnClickListener {
+                transactionReport.validateAction("transfesr", "transaction")
             }
         }
     }

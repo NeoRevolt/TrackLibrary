@@ -8,5 +8,9 @@ data class LoginRequestModel(
 	val password: String,
 
 	@field:SerializedName("email")
-	val email: String
+	val email: String,
+
+    @field:SerializedName("fcmToken")
+    val fcmToken: String
+
 )

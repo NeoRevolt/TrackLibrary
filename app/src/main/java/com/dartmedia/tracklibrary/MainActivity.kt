@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity() {
         val client = TrackingApiConfig.getApiService(this).login(
             LoginRequestModel(
                 email = "admindartmedia@gmail.com",
-                password = "Admindartmedia123"
+                password = "Admindartmedia123",
+                fcmToken = "1231sadadasd31234"
             )
         )
         client?.enqueue(object : Callback<LoginResponseModel?>{
