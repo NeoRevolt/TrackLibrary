@@ -2,7 +2,7 @@ package com.dartmedia.apptrack.remote.responses
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginModel(
+data class LoginResponseModel(
 
 	@field:SerializedName("data")
 	val data: Data,

@@ -8,13 +8,24 @@
 
     <TextView
         android:id="@+id/bearerTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="50dp"
         android:text="Bearer = "
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/transactionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Action : Transactions"
+        app:layout_constraintEnd_toEndOf="@id/bearerTxt"
+        app:layout_constraintStart_toStartOf="@id/bearerTxt"
+        app:layout_constraintTop_toBottomOf="@id/bearerTxt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.dartmedia.apptrack.remote.SessionManager
 import com.dartmedia.apptrack.remote.TrackingApiConfig
-import com.dartmedia.apptrack.remote.responses.LoginModel
+import com.dartmedia.apptrack.remote.responses.LoginResponseModel
 import com.dartmedia.apptrack.remote.responses.LoginRequestModel
 import com.dartmedia.tracklibrary.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -52,8 +52,8 @@ class MainActivity : AppCompatActivity() {
                 password = "Admindartmedia123"
             )
         )
-        client?.enqueue(object : Callback<LoginModel?>{
-            override fun onResponse(call: Call<LoginModel?>, response: Response<LoginModel?>) {
+        client?.enqueue(object : Callback<LoginResponseModel?>{
+            override fun onResponse(call: Call<LoginResponseModel?>, response: Response<LoginResponseModel?>) {
                 val responseBody = response.body()
                 if (response.isSuccessful){
                     if (responseBody != null){
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<LoginModel?>, t: Throwable) {
+            override fun onFailure(call: Call<LoginResponseModel?>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "Connection Failed", Toast.LENGTH_SHORT)
                     .show()
             }
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setSession(session: LoginModel) {
+    private fun setSession(session: LoginResponseModel) {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putString(KEY_TOKEN, session.data.accessToken)
         editor.apply()
