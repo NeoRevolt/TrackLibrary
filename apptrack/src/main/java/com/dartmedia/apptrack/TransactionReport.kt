@@ -37,7 +37,6 @@ class TransactionReport(context: Context) {
                 val responseBody = response.body()
                 if (response.isSuccessful) {
                     if (responseBody != null) {
-                        setSession(responseBody)
                         sessionManager.saveAuthToken(responseBody.data.accessToken)
                         //TODO : Set data to send back to Base
                     }
@@ -84,9 +83,9 @@ class TransactionReport(context: Context) {
         })
     }
 
-    private fun setSession(session: LoginResponseModel) {
-        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.putString(Const.KEY_TOKEN, session.data.accessToken)
-        editor.apply()
-    }
+//    private fun setSession(session: LoginResponseModel) {
+//        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+//        editor.putString(Const.KEY_TOKEN, session.data.accessToken)
+//        editor.apply()
+//    }
 }
