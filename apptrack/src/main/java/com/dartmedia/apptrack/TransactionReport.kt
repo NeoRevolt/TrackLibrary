@@ -1,6 +1,7 @@
 package com.dartmedia.apptrack
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import com.dartmedia.apptrack.remote.SessionManager
@@ -17,14 +18,20 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-private var validateState: Boolean = false
+//private var actionValidated: Boolean = false
 
 class TransactionReport(context: Context) {
 
-    private lateinit var sessionManager: SessionManager
+    companion object {
+        private const val modulePackageName = "com.dartmedia.tracklibrary"
+        private const val resultClassName = "$modulePackageName.Result"
+    }
+
     var mContext = context
-    var getLogTrackResponseModelList = ArrayList<LogTrackersItem>()
     var listActionValidations = ArrayList<ValidationsItem>()
+    private var actionValidated: Boolean = false
+    var sessionManager = SessionManager(mContext)
+
 
     /*
     * Login Request to API
@@ -32,8 +39,8 @@ class TransactionReport(context: Context) {
     fun startLogin(email: String, password: String, fcmToken: String) {
         val client = TrackingApiConfig.getApiService(mContext).login(
             LoginRequestModel(
-                email,
                 password,
+                email,
                 fcmToken
             )
         )
@@ -45,8 +52,15 @@ class TransactionReport(context: Context) {
                 val responseBody = response.body()
                 if (response.isSuccessful) {
                     if (responseBody != null) {
+                        Toast.makeText(mContext, responseBody.message, Toast.LENGTH_SHORT).show()
                         sessionManager.saveAuthToken(responseBody.data.accessToken)
-                        //TODO : Set data to send back to Base
+                        //TODO : SEND DATA OR INTENT TO BASE ACTIVITY
+                        Intent().setClassName(mContext, resultClassName)
+                            .also {
+                                // Send Image URL to DFM
+                                mContext.startActivity(it)
+                            }
+
                     }
                 } else {
                     Toast.makeText(mContext, response.message(), Toast.LENGTH_SHORT).show()
@@ -58,69 +72,6 @@ class TransactionReport(context: Context) {
                     .show()
             }
 
-        })
-    }
-
-
-    /*
-    * Send Log Actions to API
-    * */
-    fun addLogTrack(nameAction: String, action: String) {
-        val client = TrackingApiConfig.getApiService(mContext).addLogTrack(
-            AddLogTrackModel(
-                nameAction,
-                action
-            )
-        )
-        client?.enqueue(object : Callback<AddLogTrackResponseModel?> {
-            override fun onResponse(
-                call: Call<AddLogTrackResponseModel?>,
-                response: Response<AddLogTrackResponseModel?>
-            ) {
-                val responseBody = response.body()
-                if (response.isSuccessful) {
-                    if (responseBody != null) {
-                        Toast.makeText(mContext, responseBody.message, Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(mContext, response.message(), Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<AddLogTrackResponseModel?>, t: Throwable) {
-                Toast.makeText(mContext, "Connection Failed", Toast.LENGTH_SHORT)
-                    .show()
-            }
-
-        })
-    }
-
-
-    /*
-    * Get Log Track
-    * */
-    fun getLogTrack() {
-        val client = TrackingApiConfig.getApiService(mContext).getLogTrack()
-        client?.enqueue(object : Callback<GetLogTrackResponseModel?> {
-            override fun onResponse(
-                call: Call<GetLogTrackResponseModel?>,
-                response: Response<GetLogTrackResponseModel?>
-            ) {
-                val responseBody = response.body()
-                if (response.isSuccessful) {
-                    if (responseBody != null) {
-                        responseBody.data.logTrackers.let { getLogTrackResponseModelList.addAll(it) }
-                        Toast.makeText(mContext, responseBody.status, Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(mContext, response.message(), Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<GetLogTrackResponseModel?>, t: Throwable) {
-                Toast.makeText(mContext, "Connection Failed", Toast.LENGTH_SHORT)
-                    .show()
-            }
         })
     }
 
@@ -157,13 +108,16 @@ class TransactionReport(context: Context) {
 
 
     fun validateAction(nameAction: String, action: String): Boolean {
-        Log.d("ValidateAction", "BOOLEAN : $listActionValidations")
+        actionValidated = false
+        Log.d("LIST", "List Validation : $listActionValidations")
         for (i in listActionValidations.indices) {
             if (nameAction == listActionValidations[i].nameAction && action == listActionValidations[i].action) {
-                validateState = true
+                actionValidated = true
+                break
             }
         }
-        if (validateState){
+        Log.d("VALID", "Valid ? : $actionValidated")
+        if (actionValidated) {
             val client = TrackingApiConfig.getApiService(mContext).addLogTrack(
                 AddLogTrackModel(
                     nameAction,
@@ -178,36 +132,31 @@ class TransactionReport(context: Context) {
                     val responseBody = response.body()
                     if (response.isSuccessful) {
                         if (responseBody != null) {
-                            validateState = true
+                            actionValidated = true
                             Toast.makeText(mContext, responseBody.message, Toast.LENGTH_SHORT)
                                 .show()
                         }
                     } else {
-                        validateState = true
+                        actionValidated = true
                         Toast.makeText(mContext, response.message(), Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<AddLogTrackResponseModel?>, t: Throwable) {
-                    validateState = true
+                    actionValidated = true
                     Toast.makeText(mContext, "Connection Failed", Toast.LENGTH_SHORT)
                         .show()
                 }
 
             })
-        }else{
-            validateState = false
+        } else {
+            actionValidated = false
         }
-        return validateState
+        return actionValidated
     }
 
-    fun getActValidationStatus():String{
-        return validateState.toString()
+    fun getActValidationStatus(): String {
+        return actionValidated.toString()
     }
 
-//    private fun setSession(session: LoginResponseModel) {
-//        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-//        editor.putString(Const.KEY_TOKEN, session.data.accessToken)
-//        editor.apply()
-//    }
 }

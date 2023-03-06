@@ -1,20 +1,11 @@
 package com.dartmedia.tracklibrary
 
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.dartmedia.apptrack.TransactionReport
 import com.dartmedia.apptrack.remote.AuthInterceptor
 import com.dartmedia.apptrack.remote.SessionManager
-import com.dartmedia.apptrack.remote.TrackingApiConfig
-import com.dartmedia.apptrack.remote.responses.AddLogTrackModel
-import com.dartmedia.apptrack.remote.responses.AddLogTrackResponseModel
 import com.dartmedia.tracklibrary.databinding.ActivityResultBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.nio.channels.ClosedByInterruptException
 
 class Result : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
@@ -45,7 +36,7 @@ class Result : AppCompatActivity() {
             if (token != null) {
                 bearerTxt.text = sessionManager.fetchAuthToken()
             } else {
-                bearerTxt.text = "NONE"
+                bearerTxt.text = ""
             }
 
             transactionBtn.setOnClickListener {
@@ -54,7 +45,7 @@ class Result : AppCompatActivity() {
             }
 
             appOpenActionBtn.setOnClickListener {
-                transactionReport.validateAction("aplication","open")
+                transactionReport.validateAction("aplication", "open")
                 setTxt("aplication", "open", transactionReport.getActValidationStatus())
             }
 
@@ -78,7 +69,7 @@ class Result : AppCompatActivity() {
         }
     }
 
-    private fun setTxt(nameAction: String, action: String, status: String){
+    private fun setTxt(nameAction: String, action: String, status: String) {
         binding.apply {
             nameActionTxt.text = nameAction
             actionTxt.text = action
