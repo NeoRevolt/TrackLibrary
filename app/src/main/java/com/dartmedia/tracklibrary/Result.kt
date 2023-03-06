@@ -53,7 +53,7 @@ class Result : AppCompatActivity() {
             }
 
             validateBtn.setOnClickListener {
-                transactionReport.validateAction("transfesr", "transaction")
+                transactionReport.validateAction("transfer", "transaction")
             }
         }
     }

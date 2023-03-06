@@ -1,6 +1,7 @@
 package com.dartmedia.apptrack
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.dartmedia.apptrack.remote.SessionManager
 import com.dartmedia.apptrack.remote.TrackingApiConfig
@@ -156,6 +157,7 @@ class TransactionReport(context: Context) {
 
 
     fun validateAction(nameAction: String, action: String) {
+        Log.d("ValidateAction", "BOOLEAN : $listActionValidations")
         for (i in listActionValidations.indices) {
             if (nameAction == listActionValidations[i].nameAction && action == listActionValidations[i].action) {
                 validateState = true
