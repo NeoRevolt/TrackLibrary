@@ -18,7 +18,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-//private var actionValidated: Boolean = false
+/**
+ * App Action-Transaction Validator Class
+ *
+ *
+ * @author Dzalfikri Ali Zidan
+ * @version 1.0
+ * @since 3 March 2023
+ */
 
 class TransactionReport(context: Context) {
 
@@ -27,15 +34,16 @@ class TransactionReport(context: Context) {
         private const val resultClassName = "$modulePackageName.Result"
     }
 
-    var mContext = context
-    var listActionValidations = ArrayList<ValidationsItem>()
+    private var mContext = context
+    private var listActionValidations = ArrayList<ValidationsItem>()
     private var actionValidated: Boolean = false
-    var sessionManager = SessionManager(mContext)
+    private var sessionManager = SessionManager(mContext)
 
 
-    /*
-    * Login Request to API
-    * */
+    /**
+     * Login Request to API
+     *
+     * */
     fun startLogin(email: String, password: String, fcmToken: String) {
         val client = TrackingApiConfig.getApiService(mContext).login(
             LoginRequestModel(
@@ -76,9 +84,9 @@ class TransactionReport(context: Context) {
     }
 
 
-    /*
-    * TODO: Make sure Validate Action RUN every time app is Started
-    * */
+    /**
+     * TODO: Make sure Validate Action RUN every time app is Started
+     * */
     fun getAllAction() {
         val client = TrackingApiConfig.getApiService(mContext).getActionValidation()
         client?.enqueue(object : Callback<ActionValidationResponse?> {
@@ -106,17 +114,21 @@ class TransactionReport(context: Context) {
         })
     }
 
-
+    /**
+     * Validate Action and Add Action to API
+     * */
     fun validateAction(nameAction: String, action: String): Boolean {
         actionValidated = false
         Log.d("LIST", "List Validation : $listActionValidations")
+
         for (i in listActionValidations.indices) {
             if (nameAction == listActionValidations[i].nameAction && action == listActionValidations[i].action) {
                 actionValidated = true
                 break
             }
         }
-        Log.d("VALID", "Valid ? : $actionValidated")
+        Log.d("VALID", "Is Action Valid ? : $actionValidated")
+
         if (actionValidated) {
             val client = TrackingApiConfig.getApiService(mContext).addLogTrack(
                 AddLogTrackModel(
@@ -151,6 +163,8 @@ class TransactionReport(context: Context) {
             })
         } else {
             actionValidated = false
+            Toast.makeText(mContext, "Invalid Action", Toast.LENGTH_SHORT)
+                .show()
         }
         return actionValidated
     }

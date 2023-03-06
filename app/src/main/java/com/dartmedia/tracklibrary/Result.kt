@@ -71,9 +71,9 @@ class Result : AppCompatActivity() {
 
     private fun setTxt(nameAction: String, action: String, status: String) {
         binding.apply {
-            nameActionTxt.text = nameAction
-            actionTxt.text = action
-            valResultTxt.text = status
+            nameActionTxt.text = "Action Name : $nameAction"
+            actionTxt.text = "Action : $action"
+            valResultTxt.text = "Is Action Valid ? : $status"
         }
     }
 }
