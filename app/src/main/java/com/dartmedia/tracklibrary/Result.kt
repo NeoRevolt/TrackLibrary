@@ -49,12 +49,40 @@ class Result : AppCompatActivity() {
             }
 
             transactionBtn.setOnClickListener {
-                transactionReport.addLogTrack("transfer", "transaction")
+                transactionReport.validateAction("ssjeas", "sade")
+                setTxt("ssjeas", "sade", transactionReport.getActValidationStatus())
             }
 
-            validateBtn.setOnClickListener {
-                transactionReport.validateAction("transfer", "transaction")
+            appOpenActionBtn.setOnClickListener {
+                transactionReport.validateAction("aplication","open")
+                setTxt("aplication", "open", transactionReport.getActValidationStatus())
             }
+
+            transfeClickBtn.setOnClickListener {
+                transactionReport.validateAction("transfer", "click")
+                setTxt("transfer", "click", transactionReport.getActValidationStatus())
+
+            }
+
+            transferTransactionBtn.setOnClickListener {
+                transactionReport.validateAction("transfer", "transaction")
+                setTxt("transfer", "transaction", transactionReport.getActValidationStatus())
+
+            }
+
+            checkSaldoClickBtn.setOnClickListener {
+                transactionReport.validateAction("check saldo", "click")
+                setTxt("check saldo", "click", transactionReport.getActValidationStatus())
+
+            }
+        }
+    }
+
+    private fun setTxt(nameAction: String, action: String, status: String){
+        binding.apply {
+            nameActionTxt.text = nameAction
+            actionTxt.text = action
+            valResultTxt.text = status
         }
     }
 }

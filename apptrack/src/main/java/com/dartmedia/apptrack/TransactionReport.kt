@@ -156,7 +156,7 @@ class TransactionReport(context: Context) {
     }
 
 
-    fun validateAction(nameAction: String, action: String) {
+    fun validateAction(nameAction: String, action: String): Boolean {
         Log.d("ValidateAction", "BOOLEAN : $listActionValidations")
         for (i in listActionValidations.indices) {
             if (nameAction == listActionValidations[i].nameAction && action == listActionValidations[i].action) {
@@ -198,6 +198,11 @@ class TransactionReport(context: Context) {
         }else{
             validateState = false
         }
+        return validateState
+    }
+
+    fun getActValidationStatus():String{
+        return validateState.toString()
     }
 
 //    private fun setSession(session: LoginResponseModel) {

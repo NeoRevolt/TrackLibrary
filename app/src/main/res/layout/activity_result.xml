@@ -29,14 +29,44 @@
         app:layout_constraintTop_toBottomOf="@id/bearerTxt" />
 
     <Button
-        android:id="@+id/validateBtn"
+        android:id="@+id/appOpenActionBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Validate Action"
+        android:text="App-Open Action"
         app:layout_constraintEnd_toEndOf="@id/transactionBtn"
         app:layout_constraintStart_toStartOf="@id/transactionBtn"
         app:layout_constraintTop_toBottomOf="@id/transactionBtn" />
+
+    <Button
+        android:id="@+id/transfeClickBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Transfer-Click Action"
+        app:layout_constraintEnd_toEndOf="@id/transactionBtn"
+        app:layout_constraintStart_toStartOf="@id/transactionBtn"
+        app:layout_constraintTop_toBottomOf="@id/appOpenActionBtn" />
+
+    <Button
+        android:id="@+id/transferTransactionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Transfer-Click Action"
+        app:layout_constraintEnd_toEndOf="@id/transactionBtn"
+        app:layout_constraintStart_toStartOf="@id/transactionBtn"
+        app:layout_constraintTop_toBottomOf="@id/transfeClickBtn" />
+
+    <Button
+        android:id="@+id/checkSaldoClickBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="CheckSaldo-Click Action"
+        app:layout_constraintEnd_toEndOf="@id/transactionBtn"
+        app:layout_constraintStart_toStartOf="@id/transactionBtn"
+        app:layout_constraintTop_toBottomOf="@id/transferTransactionBtn" />
 
     <TextView
         android:id="@+id/validationTxt"
@@ -48,8 +78,46 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/validateBtn"
+        app:layout_constraintTop_toBottomOf="@id/checkSaldoClickBtn"
+        />
 
+    <TextView
+        android:id="@+id/nameActionTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:text="nameAction : "
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/validationTxt"
+        />
+
+    <TextView
+        android:id="@+id/actionTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:text="action : "
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameActionTxt"
+        />
+
+    <TextView
+        android:id="@+id/valResultTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Action Valid Status  : "
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionTxt"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
