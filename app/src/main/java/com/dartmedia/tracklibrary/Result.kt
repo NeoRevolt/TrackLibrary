@@ -15,22 +15,17 @@ class Result : AppCompatActivity() {
 
     private lateinit var transactionReport: TransactionReport
 
-    override fun onStart() {
-        transactionReport.getAllAction()
-        super.onStart()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         transactionReport = TransactionReport(this)
         sessionManager = SessionManager(this)
 
         val token = sessionManager.fetchAuthToken()
         authInterceptor = AuthInterceptor(this)
+        transactionReport.isActionValid("aplication", "open")
 
         binding.apply {
             if (token != null) {
@@ -40,29 +35,29 @@ class Result : AppCompatActivity() {
             }
 
             transactionBtn.setOnClickListener {
-                transactionReport.validateAction("ssjeas", "sade")
+                transactionReport.isActionValid("ssjeas", "sade")
                 setTxt("ssjeas", "sade", transactionReport.getActValidationStatus())
             }
 
             appOpenActionBtn.setOnClickListener {
-                transactionReport.validateAction("aplication", "open")
+                transactionReport.isActionValid("aplication", "open")
                 setTxt("aplication", "open", transactionReport.getActValidationStatus())
             }
 
             transfeClickBtn.setOnClickListener {
-                transactionReport.validateAction("transfer", "click")
+                transactionReport.isActionValid("transfer", "click")
                 setTxt("transfer", "click", transactionReport.getActValidationStatus())
 
             }
 
             transferTransactionBtn.setOnClickListener {
-                transactionReport.validateAction("transfer", "transaction")
+                transactionReport.isActionValid("transfer", "transaction")
                 setTxt("transfer", "transaction", transactionReport.getActValidationStatus())
 
             }
 
             checkSaldoClickBtn.setOnClickListener {
-                transactionReport.validateAction("check saldo", "click")
+                transactionReport.isActionValid("check saldo", "click")
                 setTxt("check saldo", "click", transactionReport.getActValidationStatus())
 
             }
