@@ -23,50 +23,70 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Action : Transactions"
+        android:text="Transaction : Antar Bank"
         app:layout_constraintEnd_toEndOf="@id/bearerTxt"
         app:layout_constraintStart_toStartOf="@id/bearerTxt"
         app:layout_constraintTop_toBottomOf="@id/bearerTxt" />
 
     <Button
-        android:id="@+id/appOpenActionBtn"
+        android:id="@+id/transactionAntarRekBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="App-Open Action"
-        app:layout_constraintEnd_toEndOf="@id/transactionBtn"
-        app:layout_constraintStart_toStartOf="@id/transactionBtn"
+        android:text="Transaction : Antar Rekening"
+        app:layout_constraintEnd_toEndOf="@id/bearerTxt"
+        app:layout_constraintStart_toStartOf="@id/bearerTxt"
         app:layout_constraintTop_toBottomOf="@id/transactionBtn" />
 
     <Button
-        android:id="@+id/transfeClickBtn"
+        android:id="@+id/tagihanBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Transfer-Click Action"
-        app:layout_constraintEnd_toEndOf="@id/transactionBtn"
-        app:layout_constraintStart_toStartOf="@id/transactionBtn"
-        app:layout_constraintTop_toBottomOf="@id/appOpenActionBtn" />
+        android:text="Transaction : Tagihan Internet"
+        app:layout_constraintEnd_toEndOf="@id/transactionAntarRekBtn"
+        app:layout_constraintStart_toStartOf="@id/transactionAntarRekBtn"
+        app:layout_constraintTop_toBottomOf="@id/transactionAntarRekBtn" />
 
     <Button
-        android:id="@+id/transferTransactionBtn"
+        android:id="@+id/mutasiBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Transfer-Click Action"
+        android:text="Action : Mutasi Rekening"
         app:layout_constraintEnd_toEndOf="@id/transactionBtn"
         app:layout_constraintStart_toStartOf="@id/transactionBtn"
-        app:layout_constraintTop_toBottomOf="@id/transfeClickBtn" />
+        app:layout_constraintTop_toBottomOf="@id/tagihanBtn" />
+
+    <Button
+        android:id="@+id/virtualAccBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Action : Virtual Account"
+        app:layout_constraintEnd_toEndOf="@id/transactionBtn"
+        app:layout_constraintStart_toStartOf="@id/transactionBtn"
+        app:layout_constraintTop_toBottomOf="@id/mutasiBtn" />
 
     <Button
         android:id="@+id/checkSaldoClickBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="CheckSaldo-Click Action"
+        android:text="Action : Check Saldo"
         app:layout_constraintEnd_toEndOf="@id/transactionBtn"
         app:layout_constraintStart_toStartOf="@id/transactionBtn"
-        app:layout_constraintTop_toBottomOf="@id/transferTransactionBtn" />
+        app:layout_constraintTop_toBottomOf="@id/virtualAccBtn" />
+
+    <Button
+        android:id="@+id/clickNotif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Action : Check Notif"
+        app:layout_constraintEnd_toEndOf="@id/transactionBtn"
+        app:layout_constraintStart_toStartOf="@id/transactionBtn"
+        app:layout_constraintTop_toBottomOf="@id/checkSaldoClickBtn" />
 
     <TextView
         android:id="@+id/validationTxt"
@@ -78,7 +98,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkSaldoClickBtn"
+        app:layout_constraintTop_toBottomOf="@id/clickNotif"
         />
 
     <TextView
@@ -87,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
-        android:text="nameAction : "
+        android:text="Action Name : "
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
-        android:text="action : "
+        android:text="Action : "
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
-        android:text="Action Valid Status  : "
+        android:text="Is Action Valid ? : "
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

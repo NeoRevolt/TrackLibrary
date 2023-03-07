@@ -65,7 +65,6 @@ class TransactionReport(context: Context) {
                         //TODO : SEND DATA OR INTENT TO BASE ACTIVITY
                         Intent().setClassName(mContext, resultClassName)
                             .also {
-                                // Send Image URL to DFM
                                 mContext.startActivity(it)
                             }
 
@@ -82,37 +81,6 @@ class TransactionReport(context: Context) {
 
         })
     }
-
-
-    /**
-     * TODO: Make sure Validate Action RUN every time app is Started
-     * */
-//    fun getAllAction() {
-//        val client = TrackingApiConfig.getApiService(mContext).getActionValidation()
-//        client?.enqueue(object : Callback<ActionValidationResponse?> {
-//            override fun onResponse(
-//                call: Call<ActionValidationResponse?>,
-//                response: Response<ActionValidationResponse?>
-//            ) {
-//                val responseBody = response.body()
-//                if (response.isSuccessful) {
-//                    if (responseBody != null) {
-//                        responseBody.data.validations.let {
-//                            listActionValidations.addAll(it)
-//                        }
-//                        Toast.makeText(mContext, responseBody.status, Toast.LENGTH_SHORT).show()
-//                    }
-//                } else {
-//                    Toast.makeText(mContext, response.message(), Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<ActionValidationResponse?>, t: Throwable) {
-//                Toast.makeText(mContext, "Connection Failed", Toast.LENGTH_SHORT)
-//                    .show()
-//            }
-//        })
-//    }
 
     fun isActionValid(nameAction: String, action: String): Boolean {
         var actionValid = false
@@ -144,6 +112,7 @@ class TransactionReport(context: Context) {
                 actionValid =false
             }
         })
+        Log.d("IsActionValid", "$actionValid")
         return actionValid
     }
 
@@ -182,13 +151,13 @@ class TransactionReport(context: Context) {
                                 .show()
                         }
                     } else {
-                        actionValidated = true
+                        actionValidated = false
                         Toast.makeText(mContext, response.message(), Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<AddLogTrackResponseModel?>, t: Throwable) {
-                    actionValidated = true
+                    actionValidated = false
                     Toast.makeText(mContext, "Connection Failed", Toast.LENGTH_SHORT)
                         .show()
                 }

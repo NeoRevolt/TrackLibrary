@@ -25,7 +25,9 @@ class Result : AppCompatActivity() {
 
         val token = sessionManager.fetchAuthToken()
         authInterceptor = AuthInterceptor(this)
-        transactionReport.isActionValid("aplication", "open")
+
+        transactionReport.isActionValid("application", "open")
+
 
         binding.apply {
             if (token != null) {
@@ -39,26 +41,37 @@ class Result : AppCompatActivity() {
                 setTxt("ssjeas", "sade", transactionReport.getActValidationStatus())
             }
 
-            appOpenActionBtn.setOnClickListener {
-                transactionReport.isActionValid("aplication", "open")
-                setTxt("aplication", "open", transactionReport.getActValidationStatus())
+            transactionAntarRekBtn.setOnClickListener {
+                transactionReport.isActionValid("antar rekening", "transaction")
+                setTxt("antar rekening", "transaction", transactionReport.getActValidationStatus())
             }
 
-            transfeClickBtn.setOnClickListener {
-                transactionReport.isActionValid("transfer", "click")
-                setTxt("transfer", "click", transactionReport.getActValidationStatus())
+            tagihanBtn.setOnClickListener {
+                transactionReport.isActionValid("tagihan internet", "transaction")
+                setTxt("tagihan internet", "transaction", transactionReport.getActValidationStatus())
+            }
+
+            mutasiBtn.setOnClickListener {
+                transactionReport.isActionValid("mutasi rekening", "click")
+                setTxt("mutasi rekening", "click", transactionReport.getActValidationStatus())
 
             }
 
-            transferTransactionBtn.setOnClickListener {
-                transactionReport.isActionValid("transfer", "transaction")
-                setTxt("transfer", "transaction", transactionReport.getActValidationStatus())
+            virtualAccBtn.setOnClickListener {
+                transactionReport.isActionValid("virtual account", "click")
+                setTxt("virtual account", "click", transactionReport.getActValidationStatus())
 
             }
 
             checkSaldoClickBtn.setOnClickListener {
                 transactionReport.isActionValid("check saldo", "click")
                 setTxt("check saldo", "click", transactionReport.getActValidationStatus())
+
+            }
+
+            clickNotif.setOnClickListener {
+                transactionReport.isActionValid("notification", "click")
+                setTxt("notification", "click", transactionReport.getActValidationStatus())
 
             }
         }
