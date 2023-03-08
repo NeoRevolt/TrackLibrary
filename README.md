@@ -15,7 +15,7 @@ Sebuah Demo-Library untuk App-Tracking yang menyediakan functions untuk melakuka
 
 ### 2. Create ``github.properties`` file within the root project
 ```properties
-    gpr.usr=YOUR_USERNAME //Change with your username and acces key
+    gpr.usr=YOUR_USERNAME //Change with your username
     gpr.key=YOUR_KEY  //Change with your personal acces token before
 ```
 Then add this properties to ``.gitignore``
