@@ -19,6 +19,6 @@ class ApiManager(context: Context) {
 
     companion object {
         const val USER_BASE_URL = "user_base_url"
-        const val APP_NAME = "tracking_app" //TODO (Change to Core module name)
+        const val APP_NAME = "tracking_app"
     }
 }

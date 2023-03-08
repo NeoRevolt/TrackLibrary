@@ -12,8 +12,7 @@ import com.dartmedia.apptrack.remote.responses.LoginRequestModel
 import com.dartmedia.apptrack.remote.responses.LoginResponseModel
 import com.dartmedia.apptrack.remote.responses.actionvalidation.ActionValidationResponse
 import com.dartmedia.apptrack.remote.responses.actionvalidation.ValidationsItem
-import com.dartmedia.apptrack.remote.responses.getlogtrack.GetLogTrackResponseModel
-import com.dartmedia.apptrack.remote.responses.getlogtrack.LogTrackersItem
+import com.dartmedia.apptrack.utills.Const
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,18 +20,11 @@ import retrofit2.Response
 /**
  * App Action-Transaction Validator Class
  *
- *
  * @author Dzalfikri Ali Zidan
  * @version 1.0
  * @since 3 March 2023
  */
-
 class TransactionReport(context: Context) {
-
-    companion object {
-        private const val modulePackageName = "com.dartmedia.tracklibrary"
-        private const val resultClassName = "$modulePackageName.Result"
-    }
 
     private var mContext = context
     private var listActionValidations = ArrayList<ValidationsItem>()
@@ -43,6 +35,8 @@ class TransactionReport(context: Context) {
     /**
      * Login Request to API
      *
+     * This function is experimental purpose for login in sample project,
+     * please use your own Login Request !
      * */
     fun startLogin(email: String, password: String, fcmToken: String) {
         val client = TrackingApiConfig.getApiService(mContext).login(
@@ -62,8 +56,8 @@ class TransactionReport(context: Context) {
                     if (responseBody != null) {
                         Toast.makeText(mContext, responseBody.message, Toast.LENGTH_SHORT).show()
                         sessionManager.saveAuthToken(responseBody.data.accessToken)
-                        //TODO : SEND DATA OR INTENT TO BASE ACTIVITY
-                        Intent().setClassName(mContext, resultClassName)
+                        //NOTE : SEND DATA OR INTENT TO BASE ACTIVITY (Experimental)
+                        Intent().setClassName(mContext, Const.RESULT_CLASSNAME)
                             .also {
                                 mContext.startActivity(it)
                             }
@@ -82,6 +76,15 @@ class TransactionReport(context: Context) {
         })
     }
 
+    /**
+     * Get list of valid actions and transactions list from API,
+     * and run [validateAction] when list successfully added.
+     *
+     * @param nameAction The purpose of the action
+     * @param action Action that user do
+     *
+     * @return Boolean
+     * */
     fun isActionValid(nameAction: String, action: String): Boolean {
         var actionValid = false
         val client = TrackingApiConfig.getApiService(mContext)
@@ -107,9 +110,8 @@ class TransactionReport(context: Context) {
             }
 
             override fun onFailure(call: Call<ActionValidationResponse?>, t: Throwable) {
-                Toast.makeText(mContext, "Connection Failed", Toast.LENGTH_SHORT)
-                    .show()
-                actionValid =false
+                Log.d("ACTION", "Connection Failed")
+                actionValid = false
             }
         })
         Log.d("IsActionValid", "$actionValid")
@@ -117,7 +119,13 @@ class TransactionReport(context: Context) {
     }
 
     /**
-     * Validate Action and Add Action to API
+     * Validate Action and Add Action to API when parameters passed to this function is equal to
+     * list of valid actions and transactions from API you get from [isActionValid]
+     *
+     * @param nameAction The purpose of the action
+     * @param action Action that user do
+     *
+     * @return Boolean
      * */
     fun validateAction(nameAction: String, action: String): Boolean {
         actionValidated = false
@@ -147,26 +155,23 @@ class TransactionReport(context: Context) {
                     if (response.isSuccessful) {
                         if (responseBody != null) {
                             actionValidated = true
-                            Toast.makeText(mContext, responseBody.message, Toast.LENGTH_SHORT)
-                                .show()
+                            Log.d("ACTION", "Action Successfully added to API")
                         }
                     } else {
                         actionValidated = false
-                        Toast.makeText(mContext, response.message(), Toast.LENGTH_SHORT).show()
+                        Log.d("ACTION", "Action failed added to API")
                     }
                 }
 
                 override fun onFailure(call: Call<AddLogTrackResponseModel?>, t: Throwable) {
                     actionValidated = false
-                    Toast.makeText(mContext, "Connection Failed", Toast.LENGTH_SHORT)
-                        .show()
+                    Log.d("ACTION", "Connection Failed")
                 }
 
             })
         } else {
             actionValidated = false
-            Toast.makeText(mContext, "Invalid Action", Toast.LENGTH_SHORT)
-                .show()
+            Log.d("ACTION", "Invalid Actions")
         }
         return actionValidated
     }

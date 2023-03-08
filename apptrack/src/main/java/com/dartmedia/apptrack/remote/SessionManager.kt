@@ -2,9 +2,18 @@ package com.dartmedia.apptrack.remote
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.view.Display.Mode
-import com.dartmedia.apptrack.R
 
+/**
+ * Auth Interceptor for build auth header.
+ *
+ * Auth Token fetched from [SessionManager.fetchAuthToken] using SharedPref
+ *
+ * @author Dzalfikri Ali Zidan
+ * @version 1.0
+ * @since 3 March 2023
+ *
+ * @param Context
+ */
 class SessionManager(context: Context) {
     private var preferences: SharedPreferences =
         context.getSharedPreferences(APP_NAME, Context.MODE_PRIVATE)
@@ -21,6 +30,6 @@ class SessionManager(context: Context) {
 
     companion object {
         const val USER_TOKEN = "user_token"
-        const val APP_NAME = "tracking_app" //TODO (Change to Core module name)
+        const val APP_NAME = "tracking_app" // (Change to Core module name)
     }
 }

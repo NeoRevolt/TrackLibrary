@@ -13,7 +13,6 @@ class TrackingApiConfig {
 
         private const val BASE_URL = "http://192.168.1.20:5000/api/"
 
-
         fun getApiService(context: Context): TrackingService {
             val loggingInterceptor =
                 if (BuildConfig.DEBUG) {
