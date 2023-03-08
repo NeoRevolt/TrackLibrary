@@ -41,38 +41,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-//    private fun startLogin() {
-//        val client = TrackingApiConfig.getApiService(this).login(
-//            LoginRequestModel(
-//                email = "admindartmedia@gmail.com",
-//                password = "Admindartmedia123",
-//                fcmToken = "1231sadadasd31234"
-//            )
-//        )
-//        client?.enqueue(object : Callback<LoginResponseModel?>{
-//            override fun onResponse(call: Call<LoginResponseModel?>, response: Response<LoginResponseModel?>) {
-//                val responseBody = response.body()
-//                if (response.isSuccessful){
-//                    if (responseBody != null){
-//                        Toast.makeText(this@MainActivity, responseBody.message, Toast.LENGTH_SHORT).show()
-//                        sessionManager.saveAuthToken(responseBody.data.accessToken)
-//                        Intent(this@MainActivity, Result::class.java).also {
-//                            startActivity(it)
-//                            finish()
-//                        }
-//                    }
-//                }
-//                else {
-//                    Toast.makeText(this@MainActivity, response.message(), Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<LoginResponseModel?>, t: Throwable) {
-//                Toast.makeText(this@MainActivity, "Connection Failed", Toast.LENGTH_SHORT)
-//                    .show()
-//            }
-//
-//        })
-//    }
 }

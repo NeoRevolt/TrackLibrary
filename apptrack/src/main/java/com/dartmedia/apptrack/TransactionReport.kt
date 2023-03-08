@@ -61,7 +61,6 @@ class TransactionReport(context: Context) {
                             .also {
                                 mContext.startActivity(it)
                             }
-
                     }
                 } else {
                     Toast.makeText(mContext, response.message(), Toast.LENGTH_SHORT).show()
@@ -83,10 +82,8 @@ class TransactionReport(context: Context) {
      * @param nameAction The purpose of the action
      * @param action Action that user do
      *
-     * @return Boolean
      * */
-    fun isActionValid(nameAction: String, action: String): Boolean {
-        var actionValid = false
+    fun isActionValid(nameAction: String, action: String) {
         val client = TrackingApiConfig.getApiService(mContext)
         client.getActionValidation()?.enqueue(object : Callback<ActionValidationResponse?> {
             override fun onResponse(
@@ -101,21 +98,16 @@ class TransactionReport(context: Context) {
                         }
                         Log.d("ACTION", "ACTION ADDED")
                         validateAction(nameAction, action)
-                        actionValid = true
                     }
                 } else {
                     Log.d("ACTION", "ACTION NOT FOUND")
-                    actionValid = false
                 }
             }
 
             override fun onFailure(call: Call<ActionValidationResponse?>, t: Throwable) {
                 Log.d("ACTION", "Connection Failed")
-                actionValid = false
             }
         })
-        Log.d("IsActionValid", "$actionValid")
-        return actionValid
     }
 
     /**
@@ -127,7 +119,7 @@ class TransactionReport(context: Context) {
      *
      * @return Boolean
      * */
-    fun validateAction(nameAction: String, action: String): Boolean {
+    private fun validateAction(nameAction: String, action: String): Boolean {
         actionValidated = false
         Log.d("LIST", "List Validation : $listActionValidations")
 
@@ -176,8 +168,9 @@ class TransactionReport(context: Context) {
         return actionValidated
     }
 
-    fun getActValidationStatus(): String {
-        return actionValidated.toString()
+    // Get action validation status
+    fun getActValidationStatus(): Boolean {
+        return actionValidated
     }
 
 }

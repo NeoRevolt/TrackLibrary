@@ -12,7 +12,6 @@ class Result : AppCompatActivity() {
 
     private lateinit var sessionManager: SessionManager
     private lateinit var authInterceptor: AuthInterceptor
-
     private lateinit var transactionReport: TransactionReport
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,10 +21,8 @@ class Result : AppCompatActivity() {
 
         transactionReport = TransactionReport(this)
         sessionManager = SessionManager(this)
-
         val token = sessionManager.fetchAuthToken()
         authInterceptor = AuthInterceptor(this)
-
         transactionReport.isActionValid("application", "open")
 
 
@@ -37,47 +34,50 @@ class Result : AppCompatActivity() {
             }
 
             transactionBtn.setOnClickListener {
-                transactionReport.isActionValid("ssjeas", "sade")
+                val status = transactionReport.isActionValid("ssjeas", "sade").toString()
                 setTxt("ssjeas", "sade", transactionReport.getActValidationStatus())
             }
 
             transactionAntarRekBtn.setOnClickListener {
-                transactionReport.isActionValid("antar rekening", "transaction")
+                val status =
+                    transactionReport.isActionValid("antar rekening", "transaction").toString()
                 setTxt("antar rekening", "transaction", transactionReport.getActValidationStatus())
             }
 
             tagihanBtn.setOnClickListener {
-                transactionReport.isActionValid("tagihan internet", "transaction")
-                setTxt("tagihan internet", "transaction", transactionReport.getActValidationStatus())
+                val status =
+                    transactionReport.isActionValid("tagihan internet", "transaction").toString()
+                setTxt(
+                    "tagihan internet",
+                    "transaction",
+                    transactionReport.getActValidationStatus()
+                )
             }
 
             mutasiBtn.setOnClickListener {
-                transactionReport.isActionValid("mutasi rekening", "click")
+                val status = transactionReport.isActionValid("mutasi rekening", "click").toString()
                 setTxt("mutasi rekening", "click", transactionReport.getActValidationStatus())
 
             }
 
             virtualAccBtn.setOnClickListener {
-                transactionReport.isActionValid("virtual account", "click")
+                val status = transactionReport.isActionValid("virtual account", "click").toString()
                 setTxt("virtual account", "click", transactionReport.getActValidationStatus())
-
             }
 
             checkSaldoClickBtn.setOnClickListener {
-                transactionReport.isActionValid("check saldo", "click")
+                val status = transactionReport.isActionValid("check saldo", "click").toString()
                 setTxt("check saldo", "click", transactionReport.getActValidationStatus())
-
             }
 
             clickNotif.setOnClickListener {
-                transactionReport.isActionValid("notification", "click")
+                val status = transactionReport.isActionValid("notification", "click").toString()
                 setTxt("notification", "click", transactionReport.getActValidationStatus())
-
             }
         }
     }
 
-    private fun setTxt(nameAction: String, action: String, status: String) {
+    private fun setTxt(nameAction: String, action: String, status: Boolean) {
         binding.apply {
             nameActionTxt.text = "Action Name : $nameAction"
             actionTxt.text = "Action : $action"
