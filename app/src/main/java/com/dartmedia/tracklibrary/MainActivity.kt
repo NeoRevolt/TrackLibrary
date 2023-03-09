@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.dartmedia.apptrack.TransactionReport
+import com.dartmedia.apptrack.remote.ApiManager
 import com.dartmedia.apptrack.remote.SessionManager
 import com.dartmedia.tracklibrary.databinding.ActivityMainBinding
 
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var sessionManager: SessionManager
     private lateinit var transactionReport: TransactionReport
+    private lateinit var apiManager: ApiManager
 
     companion object {
         const val EMAIL = "admindartmedia@gmail.com"
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         sessionManager = SessionManager(this)
         transactionReport = TransactionReport(this)
+        apiManager = ApiManager(this)
 
         val token = sessionManager.fetchAuthToken()
         if (token != null) {
@@ -37,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             loginBtn.setOnClickListener {
+                apiManager.setBaseUrl(ipEditText.text.toString())
                 transactionReport.startLogin(EMAIL, PASS, FCM_TOKEN)
             }
         }

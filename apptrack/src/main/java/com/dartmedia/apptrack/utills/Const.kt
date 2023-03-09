@@ -8,4 +8,5 @@ object Const {
     const val LOGIN_STATUS_SUCCESS = "success "
     const val MODULE_PACKAGE = "com.dartmedia.tracklibrary" // For experimental login testing
     const val RESULT_CLASSNAME = "$MODULE_PACKAGE.Result" // For experimental login testing
+    const val DEFAULT_BASE_URL = "http://192.168.1.20:5000/api/" // Default Base URL
 }
