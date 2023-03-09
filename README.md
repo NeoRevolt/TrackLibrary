@@ -64,7 +64,7 @@ dependencies {
 ```
 
 # Sample Code
-#### Save Token - Validate and Send Action to APi:
+#### Save Token - Validate and Send Action to API:
 
 ```kotlin
 // Initialize
@@ -89,4 +89,24 @@ public override fun onCreate(savedInstanceState: Bundle?) {
             transactionReport.isActionValid("check saldo", "click") // Validate Action when Button clicked
      }      
 }
+```
+
+#### Set Custom API Server IP Address :
+
+```kotlin
+//Initialize
+private lateinit var apiManager: ApiManager // Manage Api Server Base URL
+
+public override fun onCreate(savedInstanceState: Bundle?) {
+   ....
+   
+    // Get Instance with Context
+    apiManager = ApiManager(this)
+    
+    binding.apply {
+            btnCheckSaldo.setOnClickListener {
+            apiManager.setBaseUrl(SERVER_IP) // Set API Server API
+     }      
+}
+
 ```
