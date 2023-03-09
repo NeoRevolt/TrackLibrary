@@ -15,7 +15,7 @@ A Demo-Library for App-Tracking that provides functions to validate actions or t
 ### 2. Create ``github.properties`` file within the root project
 ```properties
     gpr.usr=YOUR_USERNAME //Change with your username
-    gpr.key=YOUR_KEY  //Change with your personal acces token before
+    gpr.key=YOUR_KEY  //Change with your personal access token before
 ```
 Then add this properties to ``.gitignore``
 
@@ -64,29 +64,29 @@ dependencies {
 ```
 
 # Sample Code
-#### With previews:
+#### Save Token - Validate and Send Action to APi:
 
-MainActivity.kt
 ```kotlin
-private lateinit var sessionManager: SessionManager
-private lateinit var authInterceptor: AuthInterceptor
-private lateinit var transactionReport: TransactionReport
+// Initialize
+private lateinit var sessionManager: SessionManager // Manage Auth Token 
+private lateinit var transactionReport: TransactionReport // Validate and Send Action/Transaction to API
 
 public override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    binding = ActivityMainBinding.inflate(layoutInflater)
-    setContentView(binding.root)
+   ....
     
+    // Get Instance with Context
     transactionReport = TransactionReport(this)
     sessionManager = SessionManager(this)
-    authInterceptor = AuthInterceptor(this)
     
-    val token = sessionManager.fetchAuthToken()
+    // Save Auth Token so Library can use it
+    sessionManager.saveAuthToken(TOKEN)
+    
+    // Validate Action when App is opened
     transactionReport.isActionValid("application", "open")
     
     binding.apply {
             btnCheckSaldo.setOnClickListener {
-            transactionReport.isActionValid("check saldo", "click")
+            transactionReport.isActionValid("check saldo", "click") // Validate Action when Button clicked
      }      
 }
 ```
