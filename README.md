@@ -91,7 +91,7 @@ public override fun onCreate(savedInstanceState: Bundle?) {
 }
 ```
 
-#### Set Custom API Server IP Address :
+#### Set Custom API Server IP Address (only for version 2.0.0) :
 
 ```kotlin
 //Initialize
