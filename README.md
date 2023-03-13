@@ -59,7 +59,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.neorevolt:apptrack-gitpack:1.0.0'
+    implementation 'com.github.neorevolt:apptrack-gitpack:2.0.0'
 }
 ```
 
