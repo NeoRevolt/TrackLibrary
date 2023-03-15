@@ -14,8 +14,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 33
-        versionCode 3
-        versionName "3.0"
+        versionCode 4
+        versionName "4.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -49,14 +49,14 @@ afterEvaluate {
 
                 groupId 'com.github.neorevolt'
                 artifactId 'apptrack-gitpack'
-                version '2.1.0'
+                version '2.1.1'
             }
             debug(MavenPublication) {
                 from components.debug
 
                 groupId 'com.github.neorevolt'
                 artifactId 'apptrack-gitpack'
-                version '2.1.0'
+                version '2.1.1'
             }
         }
 
