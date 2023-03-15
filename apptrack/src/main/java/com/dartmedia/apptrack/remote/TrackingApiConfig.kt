@@ -11,12 +11,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 class TrackingApiConfig {
 
     companion object {
-        private var baseUrl: String = ""
 
         fun getApiService(context: Context): TrackingService {
             val apiManager = ApiManager(context)
             val newBaseUrl = apiManager.fetchBaseUrl()
-            baseUrl = newBaseUrl ?: Const.DEFAULT_BASE_URL // If newBaseUrl == null then Default Base URL
+            // If newBaseUrl == null then Default Base URL
 
             val loggingInterceptor =
                 if (BuildConfig.DEBUG) {
@@ -31,7 +30,7 @@ class TrackingApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(Const.DEFAULT_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
